@@ -4,10 +4,14 @@ $(document).ready(function () {
   //   // User API Key
   let apiKey = "0c0b1ebd44d8f1bffcaebdcf320c7874";
   //   // Let userSearch take the value given in the input area with the id of search-input
+  let searchButton = $("#search-button")
+  searchButton.onclick = function(e){
+    e.preventDefault()
   let userSearch = "";
   userSearch = "bristol";
   let history = $("#history");
-  // userSearch = $("#search-input").val();
+
+
   //  Current Weather
   //   GeoLocation
   let geoQueryURL =
@@ -207,6 +211,7 @@ $(document).ready(function () {
       forecastWDiv.append(dayone, daytwo, daythree, dayfour, dayfive);
     });
   });
+}
 });
 
 // var value = "aa";
