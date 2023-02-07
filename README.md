@@ -68,7 +68,7 @@
 
   <br/>
  
-  <p><br/>
+  <p>For this weeks challenge I spent time researching localStorage by watching YouTube demonstrations. I also took time going over the code presented to us in class for that week.<br/>
  <br/>
   
   <br/>
@@ -79,6 +79,7 @@
 
   <p>Below is a screenshot of my weather dashboard</p> 
   
+https://user-images.githubusercontent.com/118772733/217385322-6a0859de-4003-49bd-9a0f-729019100adc.png
 
 
   <br/>
@@ -93,9 +94,8 @@
   <br/>
   
   <ul>
-   <li></li>
-   <li></li>
-   <li></li>
+   <li>It is worthwhile adding comments to your code for when you come back to work on it as a later date</li>
+ 
 
    
 
