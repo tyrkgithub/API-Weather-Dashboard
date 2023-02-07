@@ -1,19 +1,20 @@
-$(document).ready(function () {
-  let fiveday = $("#fiveday");
-  fiveday.text("5-Day Forecast:");
-  //   // User API Key
-  let apiKey = "0c0b1ebd44d8f1bffcaebdcf320c7874";
-  //   // Let userSearch take the value given in the input area with the id of search-input
-  let searchButton = $("#search-button")
-  searchButton.onclick = function(e){
-    e.preventDefault()
-  let userSearch = "";
-  userSearch = "bristol";
-  let history = $("#history");
+let fiveday = $("#fiveday");
+fiveday.text("5-Day Forecast:");
+//   // User API Key
+let apiKey = "0c0b1ebd44d8f1bffcaebdcf320c7874";
+//   // Let userSearch take the value given in the input area with the id of search-input
 
+let searchButton = $("#search-button");
+searchButton.on("click", function (event) {
+  event.preventDefault();
+  let userSearch = $("#search-input").val().trim();
+  let searchHistory = [];
+  let history = $("#history");
+  searchHistory.push(userSearch);
+  console.log(searchHistory);
 
   //  Current Weather
-  //   GeoLocation
+  //  Convert Location to Cooridnates
   let geoQueryURL =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     userSearch +
@@ -27,7 +28,7 @@ $(document).ready(function () {
     let lon = result[0].lon;
     latFixed = lat.toFixed(2);
     lonFixed = lon.toFixed(2);
-
+    // Get Location Weather
     let weatherQueryURL =
       "https://api.openweathermap.org/data/2.5/weather?lat=" +
       latFixed +
@@ -38,6 +39,7 @@ $(document).ready(function () {
     $.ajax({
       url: weatherQueryURL,
       method: "GET",
+      // Create Current Weather Div
     }).then(function (result) {
       let currentLocation = result.name;
       let currentDate = moment().format("DD/MM/YYYY");
@@ -60,6 +62,7 @@ $(document).ready(function () {
       currentWTitle.text(currentLocation + " " + currentDate);
       currentWDiv.append(currentWTitle, currentWUl);
     });
+    // Create History Button
     $.ajax({
       url: weatherQueryURL,
       method: "GET",
@@ -211,7 +214,6 @@ $(document).ready(function () {
       forecastWDiv.append(dayone, daytwo, daythree, dayfour, dayfive);
     });
   });
-}
 });
 
 // var value = "aa";
