@@ -5,11 +5,11 @@
   
  <br/>
   <ul>
-    <li><a href="https://github.com/tyrkgithub/Weather-Dashboard/blob/main/README.md#link">Link</a></li>
-    <li><a href="https://github.com/tyrkgithub/Weather-Dashboard/blob/main/README.md#acceptance-criteria">User Story</a></li>
-    <li><a href="https://github.com/tyrkgithub/Weather-Dashboard/blob/main/README.md#resources">Resources</a></li>
-    <li><a href="https://github.com/tyrkgithub/Weather-Dashboard/blob/main/README.md#visual-references">Visual References</a></li>
-    <li><a href="https://github.com/tyrkgithub/Weather-Dashboard/blob/main/README.md#notes">Notes</a></li>
+    <li><a href="https://github.com/tyrkgithub/API-Weather-Dashboard/blob/main/README.md#link">Link</a></li>
+    <li><a href="https://github.com/tyrkgithub/API-Weather-Dashboard/blob/main/README.md#acceptance-criteria">User Story</a></li>
+    <li><a href="https://github.com/tyrkgithub/API-Weather-Dashboard/blob/main/README.md#resources">Resources</a></li>
+    <li><a href="https://github.com/tyrkgithub/API-Weather-Dashboard/blob/main/README.md#visual-references">Visual References</a></li>
+    <li><a href="https://github.com/tyrkgithub/API-Weather-Dashboard/blob/main/README.md#notes">Notes</a></li>
   
   </ul>
   <br/>
