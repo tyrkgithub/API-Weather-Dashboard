@@ -79,7 +79,7 @@
 
   <p>Below is a screenshot of my weather dashboard</p> 
   
-https://user-images.githubusercontent.com/118772733/217385322-6a0859de-4003-49bd-9a0f-729019100adc.png
+![217385322-6a0859de-4003-49bd-9a0f-729019100adc](https://user-images.githubusercontent.com/118772733/223766992-83330ed0-bd8d-497e-9140-7e19f6289578.png)
 
 
   <br/>
