@@ -1,4 +1,4 @@
-# <h1>Week Eight Challenge - Weather Dashboard</h1>
+# <h1>API Weather Dashboard</h1>
   <br/>
  <h2>My Task</h2> 
    <p>This weeks challenge is to create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code</p>
