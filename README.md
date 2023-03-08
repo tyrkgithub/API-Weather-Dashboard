@@ -59,7 +59,7 @@
       <li>The temperature</li>
       <li>The humidity</li>
      </ul>
-    <li>When a user click on a city in the search history they are again presented with current and future conditions for that city<li>
+    <li>When a user click on a city in the search history they are again presented with current and future conditions for that city</li>
   </ul>
   
   <br/>
