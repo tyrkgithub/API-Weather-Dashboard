@@ -1,34 +1,32 @@
-let fiveday = $("#fiveday");
-fiveday.text("5-Day Forecast:");
-//   // User API Key
+// DEVELOPER API
 let apiKey = "0c0b1ebd44d8f1bffcaebdcf320c7874";
-//   // Let userSearch take the value given in the input area with the id of search-input
 
-let searchButton = $("#search-button");
+// SEARCH BUTTON
+let searchButton = $("#search-button"); // LINK TO HTML
 searchButton.on("click", function (event) {
-  event.preventDefault();
-  let userSearch = $("#search-input").val().trim();
-  let searchHistory = [];
-  let history = $("#history");
-  searchHistory.push(userSearch);
-  console.log(searchHistory);
+  // ON CLICK DO THE FOLLOWING
+  event.preventDefault(); // PREVENT DEFAULT
+  let userSearch = $("#search-input").val().trim(); // USER SEARCH IS THE TRIMMED VALUE OF SEARCH-INPUT
+  let searchHistory = []; // CREATE A SEARCH HISTOY ARRAY
+  searchHistory.push(userSearch); // PUSH THE USER SEARCH TO THE SEARCH HISTORY
+  let history = $("#history"); // LINK TO HTML TO USE BELOW
 
-  //  Current Weather
-  //  Convert Location to Cooridnates
-  let geoQueryURL =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
-    userSearch +
-    "&limit=1&appid=" +
-    apiKey;
+  //  CURRENT WEATHER
+  let geoQueryURL = // SEARCH OPEN WEATHER API
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
+    userSearch + // USER INPUT
+    "&limit=1&appid=" + // LIMIT IT TO 1 SEARCH AND ADD THIS API KEY
+    apiKey; // API KEY
   $.ajax({
-    url: geoQueryURL,
-    method: "GET",
+    url: geoQueryURL, // USING THE URL ABOVE
+    method: "GET", // GET THE FOLLOWING:
   }).then(function (result) {
-    let lat = result[0].lat;
-    let lon = result[0].lon;
-    latFixed = lat.toFixed(2);
-    lonFixed = lon.toFixed(2);
-    // Get Location Weather
+    let lat = result[0].lat; // GET LATTITUDE
+    let lon = result[0].lon; // GET LONGITUDE
+    latFixed = lat.toFixed(2); // FIX IT TO 2 DECIMAL PLACES
+    lonFixed = lon.toFixed(2); // FIX IT TO 2 DECIMAL PLACES
+
+    // RETRIEVE CURRENT WEATHER
     let weatherQueryURL =
       "https://api.openweathermap.org/data/2.5/weather?lat=" +
       latFixed +
@@ -39,7 +37,8 @@ searchButton.on("click", function (event) {
     $.ajax({
       url: weatherQueryURL,
       method: "GET",
-      // Create Current Weather Div
+
+      // CREATE A CURRENT WEATHER DIV
     }).then(function (result) {
       let currentLocation = result.name;
       let currentDate = moment().format("DD/MM/YYYY");
@@ -48,7 +47,7 @@ searchButton.on("click", function (event) {
       let currentHumidity = result.main.humidity;
       let currentIconId = result.weather[0].icon;
       let currentTempC = currentTempK - 273.15;
-      currentTempCFixed = currentTempC.toFixed(2);
+      let currentTempCFixed = currentTempC.toFixed(2);
       let currentWDiv = $("#today");
       let currentWTitle = $("<h2>");
       let currentWUl = $("<ul>");
@@ -62,21 +61,24 @@ searchButton.on("click", function (event) {
       currentWTitle.text(currentLocation + " " + currentDate);
       currentWDiv.append(currentWTitle, currentWUl);
     });
-    // Create History Button
+
+    // CREATE HISTORY BUTTON FOR USER SEARCH
     $.ajax({
       url: weatherQueryURL,
       method: "GET",
     }).then(function (result) {
       let historyLocation = "historyLocation";
       let currentLocation = result.name;
-      localStorage.setItem(historyLocation, currentLocation);
+      localStorage.setItem(historyLocation, currentLocation); // ADD THE CURRENT USER SEARCH TO LOCAL STORAGE
       let historyBtn = $("<button>").text(
-        localStorage.getItem("historyLocation")
+        // CREATE A HITORY BUTTON
+        localStorage.getItem("historyLocation") // ADD THE TEXT FROM LOCAL STOARGE TO THE BUTTON(S)
       );
-      history.append(historyBtn);
+      history.append(historyBtn); // ADD THE HISTOR BUTTONS TO THE HISTORY DIV
     });
 
-    // 5 day forecast
+    // 5 DAY FORECAST
+    // RETRIEVE FORECAST
     let forecastQueryURL =
       "https://api.openweathermap.org/data/2.5/forecast?lat=" +
       latFixed +
@@ -91,32 +93,31 @@ searchButton.on("click", function (event) {
       console.log(result);
       let forecastWDiv = $("#forecast");
 
-      //   Day 1 Forecast
-      let dayoneDateID = result.list[8].dt_txt;
-      dayoneDate = moment(dayoneDateID).format("dddd");
-      console.log(dayoneDate);
-      let dayoneTempK = result.list[8].main.temp;
-      let dayoneTempC = dayoneTempK - 273.15;
-      let dayoneTempCFixed = dayoneTempC.toFixed(2);
-      let dayoneWind = result.list[8].wind.speed;
-      let dayoneHumidity = result.list[8].main.humidity;
-      let dayone = $("<ul>");
-      let dayoneTitle = $("<h5>");
-      dayoneTitle.text(dayoneDate);
-      let dayoneFTempCFixed = $("<li>");
-      let dayoneFWind = $("<li>");
-      let dayoneFHumidity = $("<li>");
-      dayoneFTempCFixed.text("Temp: " + dayoneTempCFixed + "°C");
-      dayoneFWind.text("Wind: " + dayoneWind + " KPH");
-      dayoneFHumidity.text("Humidity: " + dayoneHumidity + "%");
+      // DAY 1
+      let dayoneDateID = result.list[8].dt_txt; // GET THE DATE
+      dayoneDate = moment(dayoneDateID).format("dddd"); // FORMAT THE DATE
+      let dayoneTempK = result.list[8].main.temp; // GET THE TEMP
+      let dayoneTempC = dayoneTempK - 273.15; // CONVERT THE TEMP TO CELCIUS
+      let dayoneTempCFixed = dayoneTempC.toFixed(2); // FIX THE TEMP TO 2 DECIMAL PLACES
+      let dayoneWind = result.list[8].wind.speed; // GET THE WIND
+      let dayoneHumidity = result.list[8].main.humidity; // GET THE HUMIDITY
+      let dayone = $("<ul>"); // CREATE A LIST
+      let dayoneTitle = $("<h5>"); // CREATE A H5
+      dayoneTitle.text(dayoneDate); // USE THE FORMATED DATE AS TEXT IN THE H5
+      let dayoneFTempCFixed = $("<li>"); // CREATE LIST ENTRY
+      let dayoneFWind = $("<li>"); // CREATE LIST ENTRY
+      let dayoneFHumidity = $("<li>"); // CREATE LIST ENTRY
+      dayoneFTempCFixed.text("Temp: " + dayoneTempCFixed + "°C"); // ADD TEMP TO LIST
+      dayoneFWind.text("Wind: " + dayoneWind + " KPH"); // ADD WIND TO LIST
+      dayoneFHumidity.text("Humidity: " + dayoneHumidity + "%"); // ADD HUMIDITY TO LIST
       dayone.append(
         dayoneTitle,
         dayoneFTempCFixed,
         dayoneFWind,
         dayoneFHumidity
-      );
+      ); // APPEND H5 AND LIST ENTRIES TO DAY ONE
 
-      // Day 2
+      // DAY 2
       let daytwoDateID = result.list[16].dt_txt;
       daytwoDate = moment(daytwoDateID).format("dddd");
       let daytwoTempK = result.list[16].main.temp;
@@ -140,7 +141,7 @@ searchButton.on("click", function (event) {
         daytwoFHumidity
       );
 
-      //Day 3
+      // DAY 3
       let daythreeDateID = result.list[24].dt_txt;
       daythreeDate = moment(daythreeDateID).format("dddd");
       let daythreeTempK = result.list[24].main.temp;
@@ -164,7 +165,7 @@ searchButton.on("click", function (event) {
         daythreeFHumidity
       );
 
-      //Day 4
+      // DAY 4
       let dayfourDateID = result.list[32].dt_txt;
       dayfourDate = moment(dayfourDateID).format("dddd");
       let dayfourTempK = result.list[32].main.temp;
@@ -188,7 +189,7 @@ searchButton.on("click", function (event) {
         dayfourFHumidity
       );
 
-      //Day 5
+      // DAY 5
       let dayfiveDateID = result.list[39].dt_txt;
       dayfiveDate = moment(dayfiveDateID).format("dddd");
       let dayfiveTempK = result.list[39].main.temp;
@@ -211,41 +212,8 @@ searchButton.on("click", function (event) {
         dayfiveFWind,
         dayfiveFHumidity
       );
+      // APPEND DAYS TOGETHER
       forecastWDiv.append(dayone, daytwo, daythree, dayfour, dayfive);
     });
   });
 });
-
-// var value = "aa";
-// localStorage.setItem("testKey", value);
-// var test = localStorage.getItem("testKey");
-// alert(test);
-
-// let currentIconImage = $("<img>");
-// currentIconImage.scr =
-//   "http://openweathermap.org/img/wn/" + currentIconId + "@2x.png";
-// currentWTitle.append(currentIconImage);
-
-// let list = [];
-//   list.push("<h1>John<h1>");
-//   list.push("<h2>David<h2>");
-//   localStorage.setItem("list", JSON.stringify(list));
-
-//   // Retrieve
-//   document.getElementById("result").innerHTML = JSON.parse(
-//     localStorage.getItem("list")
-//   );
-// } else {
-//   document.getElementById("result").innerHTML =
-//     "Sorry, your browser does not support Web Storage...";
-// }
-
-// }).then(function (result) {
-//   let historyLocation = "historyLocation";
-//   let currentLocation = result.name;
-//   localStorage.setItem(historyLocation, currentLocation);
-//   let historyBtn = $("<button>").text(
-//     localStorage.getItem("historyLocation")
-//   );
-//   history.append(historyBtn);
-// });
